@@ -1,0 +1,19 @@
+{
+  "name": "abb-tdd-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-jasmine-browser": "^1.3.0",
+    "gulp-jasmine-phantom": "^3.0.0",
+    "gulp-watch": "^4.3.5",
+    "jasmine-istanbul-phantom": "^1.1.1"
+  }
+}
