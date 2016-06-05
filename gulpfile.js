@@ -6,8 +6,8 @@ var istanbul = require('gulp-istanbul');
 
 var jipConfig = {
     base: '.',
-    src: ['app/**/*.js', '!app/**/*.spec.js', '!app/vendor/**'],
-    lib: ['app/vendor/angular/angular.js', 'app/vendor/angular-mocks/angular-mocks.js'],
+    src: ['app/**/*.js', '!app/**/*.spec.js', '!vendor/**'],
+    lib: ['vendor/angular/angular.js', 'vendor/angular-mocks/angular-mocks.js'],
     spec: 'app/**/*.spec.js',
     istanbul: {
         report: 'report',
@@ -16,8 +16,8 @@ var jipConfig = {
 };
 
 var specRunnerConfig = [
-    'app/vendor/angular/angular.js',
-    'app/vendor/angular-mocks/angular-mocks.js',
+    'vendor/angular/angular.js',
+    'vendor/angular-mocks/angular-mocks.js',
     'app/**/*.js',
     'app/**/*.spec.js'
 ];
@@ -26,7 +26,7 @@ gulp.task('spec-runner', function () {
     return gulp.src(specRunnerConfig)
         .pipe(watch(specRunnerConfig))
         .pipe(jasmineBrowser.specRunner())
-        .pipe(jasmineBrowser.server({port: 8888}));
+        .pipe(jasmineBrowser.server({port: 8887}));
 });
 
 gulp.task('coverage-test', function () {
