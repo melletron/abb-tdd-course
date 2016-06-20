@@ -1,7 +1,9 @@
 package org.sample.services;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -27,5 +29,33 @@ public class CardSorterTest {
 
         assertThat(sortedCards, is(arrayWithSize(52)));
         assertThat(sortedCards, is(arrayContaining(sortedDeck.split(";"))));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldCheckIfSuitIsCorrect(){
+        String[] wrongCards = {"a1", "h2"};
+
+        cardSorter.sort(wrongCards);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldCheckIfValueIsInteger(){
+        String[] wrongCards = {"♥a", "♣aa"};
+
+        cardSorter.sort(wrongCards);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldCheckIfValueIsHighEnough(){
+        String[] wrongCards = {"♥2", "♣1"};
+
+        cardSorter.sort(wrongCards);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void itShouldCheckIfValueIsLowEnough(){
+        String[] wrongCards = {"♥2", "♣561"};
+
+        cardSorter.sort(wrongCards);
     }
 }
