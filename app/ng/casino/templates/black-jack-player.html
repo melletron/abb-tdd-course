@@ -1,0 +1,9 @@
+<h1>{{name}}</h1>
+<a data-ng-click="player.take(table.call())" class="btn btn-danger">Hit me</a>
+<hr/>
+Score: {{player.calculateScore()}}
+<ul class="list-group">
+    <li data-ng-repeat="card in player.cards" class="list-group-item">
+        <black-jack-card data-card="{{card}}"/>
+    </li>
+</ul>

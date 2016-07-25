@@ -1,1 +1,1 @@
-angular.module('tddApp', []);
+angular.module('casino', ['casino.black-jack.directives']);
