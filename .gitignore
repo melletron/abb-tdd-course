@@ -1,0 +1,6 @@
+node_modules
+app/vendor
+vendor
+tmp
+report
+.idea
