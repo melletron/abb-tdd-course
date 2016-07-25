@@ -37,6 +37,9 @@ describe("casino.black-jack.directives", function () {
             this.blackJackCardElement = angular.element('<black-jack-card />');
             this.$compile(this.blackJackCardElement)(this.$scope);
             this.$scope.$digest();
+
+            console.log(this.blackJackCardElement.html());
+
             expect(true).toBe(true);
         });
 
@@ -64,6 +67,20 @@ describe("casino.black-jack.directives", function () {
 
             });
 
+        });
+
+    });
+
+    describe('blackJackPlayer', function () {
+
+        beforeEach(function () {
+            var that = this;
+            inject(function ($compile, $rootScope, $templateCache, blackJackPlayerDirective) {
+                that.blackJackPlayer = blackJackPlayerDirective[0];
+                that.$compile = $compile;
+                that.$scope = $rootScope.$new();
+                $templateCache.put('ng/casino/templates/black-jack-card.html', '');
+            });
         });
 
     });

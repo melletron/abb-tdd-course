@@ -28,6 +28,10 @@
 
         return {
             restrict: 'E',
+            scope: true,
+            link: function (scope, element, attr) {
+                scope.name = attr.name;
+            },
             controller: 'BlackJackPlayerController as player',
             templateUrl: "ng/casino/templates/black-jack-player.html"
         };
@@ -36,6 +40,10 @@
     angular.module('casino.black-jack.directives', ['casino.black-jack.controllers'])
         .directive('blackJackCard', blackJackCard)
         .directive('blackJackTable', blackJackTable)
+        .directive('extendedDirective', function (blackJackTableDirective) {
+            console.log(blackJackTableDirective);
+            return blackJackTableDirective;
+        })
         .directive('blackJackPlayer', blackJackPlayer);
 
 

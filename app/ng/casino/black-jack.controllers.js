@@ -3,25 +3,29 @@
 
     var BlackJackTableController = function () {
         this.deck = "♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";");
-        this.deck = this.shuffle(this.deck);
+        this.deck = BlackJackTableController.shuffle(this.deck);
     };
 
+    //Statics
+    BlackJackTableController.shuffle = function shuffle(input) {
+        var inputCache = input.join(';');
+        for (var i = input.length - 1; i >= 0; i--) {
+
+            var randomIndex = Math.floor(Math.random() * (i + 1));
+            var itemAtIndex = input[randomIndex];
+
+            input[randomIndex] = input[i];
+            input[i] = itemAtIndex;
+        }
+        if (inputCache === input.join(';')) {
+            return this.shuffle(input);
+        }
+        return input;
+    };
+
+    //Methods
     BlackJackTableController.prototype = {
-        shuffle: function shuffle(input) {
-            var inputCache = input.join(';');
-            for (var i = input.length - 1; i >= 0; i--) {
-
-                var randomIndex = Math.floor(Math.random() * (i + 1));
-                var itemAtIndex = input[randomIndex];
-
-                input[randomIndex] = input[i];
-                input[i] = itemAtIndex;
-            }
-            if (inputCache === input.join(';')) {
-                return this.shuffle(input);
-            }
-            return input;
-        },
+        shuffle: BlackJackTableController.shuffle,
         hitMe: function () {
             return this.deck.pop();
         },
@@ -69,6 +73,7 @@
             return score + '';
         }
     };
+
 
     angular.module("casino.black-jack.controllers", ['casino.data-access.resource'])
         .constant('SCORES', {
