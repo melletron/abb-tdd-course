@@ -1,9 +1,11 @@
 (function () {
     "use strict";
 
-    var BlackJackTableController = function () {
+    var BlackJackTableController = function ($scope) {
         this.deck = "♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";");
         this.deck = BlackJackTableController.shuffle(this.deck);
+        this.timePlayed = 0;
+        setInterval(() => this.addTime($scope), 1000)
     };
 
     //Statics
@@ -25,6 +27,10 @@
 
     //Methods
     BlackJackTableController.prototype = {
+        addTime: function ($scope) {
+            this.timePlayed++;
+            $scope.$apply();
+        },
         shuffle: BlackJackTableController.shuffle,
         hitMe: function () {
             return this.deck.pop();
