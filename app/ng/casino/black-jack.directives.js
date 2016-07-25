@@ -7,6 +7,7 @@
             restrict: 'AEC',
             templateUrl: "ng/casino/templates/black-jack-card.html",
             link: function (scope, element, attr) {
+
                 scope.toggle = function () {
                     console.log('toggling');
                 };
@@ -30,7 +31,15 @@
             restrict: 'E',
             scope: true,
             link: function (scope, element, attr) {
+                window.melle = scope.$parent.table;
+
                 scope.name = attr.name;
+
+                if (scope.$parent.table) {
+                    scope.$parent.table.present(scope.player);
+                } else {
+                    throw new Error("no table to sit at ...");
+                }
             },
             controller: 'BlackJackPlayerController as player',
             templateUrl: "ng/casino/templates/black-jack-player.html"

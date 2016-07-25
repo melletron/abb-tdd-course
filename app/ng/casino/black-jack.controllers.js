@@ -5,7 +5,9 @@
         this.deck = "♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";");
         this.deck = BlackJackTableController.shuffle(this.deck);
         this.timePlayed = 0;
-        $interval(() => this.addTime(), 1000)
+        this.players = [];
+        this.prettyTimePlayed = "00:00:00";
+        $interval(() => this.addTime(), 1000);
     };
 
     //Statics
@@ -27,8 +29,31 @@
 
     //Methods
     BlackJackTableController.prototype = {
+        reshuffle: function () {
+            var that = this;
+            angular.forEach(this.players, function (player) {
+                var cards = player.cards.length;
+                var i = 0;
+                for (; i < cards; i++) {
+                    let card = player.cards.pop();
+                    that.deck.push(card.suit + "" + card.face);
+                }
+            });
+            this.deck = BlackJackTableController.shuffle(this.deck);
+        },
+        present: function (player) {
+            this.players.push(player);
+        },
         addTime: function () {
             this.timePlayed++;
+            this.prettyTimePlayed = this.prettifyTime(this.timePlayed);
+        },
+        prettifyTime: function (time) {
+            var s = time % 60;
+            var m = Math.floor(time / 60);
+            var h = Math.floor(m / 60);
+            m -= (h * 60);
+            return (h < 10 && "0" || "") + h + ":" + (m < 10 && "0" || "") + m + ":" + (s < 10 && "0" || "") + s;
         },
         shuffle: BlackJackTableController.shuffle,
         hitMe: function () {
