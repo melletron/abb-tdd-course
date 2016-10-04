@@ -1,0 +1,8 @@
+<h1>Score board</h1>
+
+<div data-ng-repeat="player in players">
+    <!--
+            TODO: Why does player.name doesn't work?
+        -->
+    <score name="{{players[$index].name}}"></score>
+</div>

@@ -101,12 +101,7 @@ describe("casino.black-jack.controllers", function () {
             });
         });
 
-        describe('calculateScore', function () {
-            it("looks at the cards in the hand and returns the score", function () {
-                this.blackJackPlayerController.calculateScore();
-                expect(true).toBe(true);
-            });
-        });
+
 
     });
 

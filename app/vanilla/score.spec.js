@@ -1,4 +1,4 @@
-describe("Score", function () {
+xdescribe("Score", function () {
 
     it("...", function () {
 

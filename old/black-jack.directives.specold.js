@@ -9,7 +9,7 @@ describe("casino.black-jack.directives", function () {
                 that.blackJackCard = blackJackCardDirective[0];
                 that.$compile = $compile;
                 that.$scope = $rootScope.$new();
-                $templateCache.put('ng/casino/templates/black-jack-card.html', '<h1 class="{{(card.suit === \'♥\' || card.suit === \'♦\') && \'text-danger\' || \'\' }}" data-ng-click="toggle()">{{card.suit}}{{card.face}}</h1>');
+                $templateCache.put('ng/casino/templates/card.html', '<h1 class="{{(card.suit === \'♥\' || card.suit === \'♦\') && \'text-danger\' || \'\' }}" data-ng-click="toggle()">{{card.suit}}{{card.face}}</h1>');
             });
         });
 
@@ -17,7 +17,7 @@ describe("casino.black-jack.directives", function () {
                 expect(this.blackJackCard.restrict).toEqual('AEC');
         });
 
-        it('loads teh black-jack-card.html template', function () {
+        it('loads teh card.html template', function () {
 
             this.blackJackCardElement = angular.element('<black-jack-card data-card="{{card}}"/>');
             this.$scope.card = {
@@ -79,7 +79,7 @@ describe("casino.black-jack.directives", function () {
                 that.blackJackPlayer = blackJackPlayerDirective[0];
                 that.$compile = $compile;
                 that.$scope = $rootScope.$new();
-                $templateCache.put('ng/casino/templates/black-jack-card.html', '');
+                $templateCache.put('ng/casino/templates/card.html', '');
             });
         });
 

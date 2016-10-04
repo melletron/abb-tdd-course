@@ -15,11 +15,23 @@
 
 <div class="container-fluid">
 
+    <div class="row">
+        <div class="col-xs-3">
+            &nbsp;
+        </div>
+        <div class="col-xs-6">
+            <score-board/>
+        </div>
+        <div class="col-xs-3">
+            &nbsp;
+        </div>
+    </div>
+
+    <hr/>
+
     <div class="row" id="original">
         <div class="col-xs-12">
-
-            <black-jack-table/>
-            <!--<extended-directive/>-->
+            <black-jack/>
         </div>
     </div>
 
@@ -27,9 +39,17 @@
 
 
 <script src="../vendor/angular/angular.js"></script>
-<script src="ng/casino/data-access/resource.js"></script>
-<script src="ng/casino/black-jack.controllers.js"></script>
-<script src="ng/casino/black-jack.directives.js"></script>
+<script src="../vendor/ngstorage/ngStorage.js"></script>
+<script src="ng/casino/models/base.js"></script>
+<script src="ng/casino/models/player.js"></script>
+<script src="ng/casino/collections/black-jack.js"></script>
+<script src="ng/casino/functions/main.js"></script>
+<script src="ng/casino/presentation/ui/card/card.js"></script>
+<script src="ng/casino/presentation/modules/black-jack-player/black-jack-player.js"></script>
+<script src="ng/casino/presentation/modules/black-jack-table/black-jack-table.js"></script>
+<script src="ng/casino/presentation/modules/score/score.js"></script>
+<script src="ng/casino/presentation/widgets/black-jack/black-jack.js"></script>
+<script src="ng/casino/presentation/widgets/score-board/score-board.js"></script>
 <script src="app.js"></script>
 
 </body>
