@@ -2,11 +2,23 @@
     "use strict";
 
     angular.module("casino.functions.main", [])
-        .factory('main', function (SCORES) {
+        .factory('main', function () {
+            const SCORES = {
+                A: 1,
+                K: 10,
+                Q: 10,
+                J: 10,
+                10: 10,
+                9: 9,
+                8: 8,
+                7: 7,
+                6: 6,
+                5: 5,
+                4: 4,
+                3: 3,
+                2: 2
+            };
             return {
-                getDeckOfCards: () => {
-                    return "♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";");
-                },
                 flatten: data => {
                     var returnData = [];
                     data.forEach(function (element) {
@@ -14,7 +26,6 @@
                     });
                     return returnData;
                 },
-                //TODO: this would work nicely with a reduce function ..
                 getBlackJackScore: cards => {
                     var score = 0;
                     var aces = 0;
@@ -52,39 +63,8 @@
                         return this.shuffle(input);
                     }
                     return input;
-                },
-                prettifyTime: seconds => {
-                    var time = { year: 31536000, day: 86400, hour: 3600, minute: 60, second: 1 },
-                        res = [];
-
-                    if (seconds === 0) return 'now';
-
-                    for (var key in time) {
-                        if (seconds >= time[key]) {
-                            var val = Math.floor(seconds / time[key]);
-                            res.push(val += val > 1 ? ' ' + key + 's' : ' ' + key);
-                            seconds = seconds % time[key];
-                        }
-                    }
-
-                    return res.length > 1 ? res.join(', ').replace(/,([^,]*)$/, ' and' + '$1') : res[0]
                 }
             };
-        })
-        .constant('SCORES', {
-            A: 1,
-            K: 10,
-            Q: 10,
-            J: 10,
-            10: 10,
-            9: 9,
-            8: 8,
-            7: 7,
-            6: 6,
-            5: 5,
-            4: 4,
-            3: 3,
-            2: 2
         });
 
 

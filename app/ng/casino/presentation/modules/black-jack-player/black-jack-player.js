@@ -14,6 +14,14 @@
             this.updateScore = () => {
                 this.score = player.calculateScore();
             };
+            this.leave = () => {
+                if (this.cards.length > 0) {
+                    console.log(`${this.name} cannot leave until the game is over...\r\nPlease hit the reshuffle button`);
+                } else {
+                    players.removeByName(this.name);
+                }
+
+            }
         }
     };
 
