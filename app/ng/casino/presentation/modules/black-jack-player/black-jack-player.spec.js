@@ -72,6 +72,7 @@ describe('casino.presentation.modules.black-jack-player', function () {
             });
 
             it("doesn't calls the removeByName method from the players service if cards is empty", function () {
+                spyOn(console, 'log');
                 this.blackJackPlayerDirectiveController.cards = [0];
                 this.blackJackPlayerDirectiveController.leave();
                 expect(this.playersMock.removeByName).not.toHaveBeenCalled();
