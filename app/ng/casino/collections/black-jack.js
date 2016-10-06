@@ -112,7 +112,7 @@
         }
     };
 
-    angular.module("casino.collections.black-jack", ["casino.interfaces.local-storage", "casino.models.player", "casino.models.card"])
+    angular.module("casino.collections.black-jack", ["casino.interfaces.local-storage", "casino.models.player"])
     /**
      * Because a service is a singleton
      * and gets initialised by Angular on bootstrap

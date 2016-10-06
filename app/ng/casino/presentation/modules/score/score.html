@@ -1,4 +1,4 @@
-<ul>
-    <li>Name: {{player.name}}</li>
-    <li>Score: {{player.score}}</li>
+<ul class="list-group">
+    <li class="list-group-item">Name: {{player.name}}</li>
+    <li class="list-group-item {{(player.score == 'Bust') && 'list-group-item-danger' || (player.score == 'Black Jack') && 'list-group-item-success' ||''}}">Score: {{player.score}}</li>
 </ul>

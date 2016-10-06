@@ -27,8 +27,8 @@
                     return returnData;
                 },
                 getBlackJackScore: cards => {
-                    var score = 0;
-                    var aces = 0;
+                    let score = 0;
+                    let aces = 0;
                     cards.forEach(function (card) {
                         score += SCORES[card.substr(1)] || 0;
                         if (card.substr(1) === 'A') {
@@ -49,20 +49,15 @@
                     }
                     return score + '';
                 },
-                shuffle: input => {
-                    var inputCache = input.join(';');
-                    for (var i = input.length - 1; i >= 0; i--) {
-
-                        var randomIndex = Math.floor(Math.random() * (i + 1));
-                        var itemAtIndex = input[randomIndex];
-
+                shuffle: function (input) {
+                    const inputCache = input.join(';');
+                    for (let i = input.length - 1; i >= 0; i--) {
+                        let randomIndex = Math.floor(Math.random() * (i + 1));
+                        let itemAtIndex = input[randomIndex];
                         input[randomIndex] = input[i];
                         input[i] = itemAtIndex;
                     }
-                    if (inputCache === input.join(';')) {
-                        return this.shuffle(input);
-                    }
-                    return input;
+                    return (inputCache !== input.join(';')) ? input : this.shuffle(input);
                 }
             };
         });
