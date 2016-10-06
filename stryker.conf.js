@@ -1,16 +1,33 @@
 module.exports = function (config) {
     config.set({
         files: [
-            // Add your files here, this is just an example:
             {
-                pattern: 'app/**/*.js',
+                pattern: 'vendor/angular/angular.js',
+                mutated: false,
+                included: true
+            },
+            {
+                pattern: 'vendor/angular-mocks/angular-mocks.js',
+                mutated: false,
+                included: true
+            },
+            {
+                pattern: 'test/mocks/**/*.js',
+                mutated: false,
+                included: true
+            },
+            {
+                pattern: 'app/ng/**/!(*spec).js',
                 mutated: true,
                 included: true
             },
-            'app/**/*.spec.js'
+            'app/ng/**/*.spec.js'
         ],
         testRunner: 'karma',
         testFramework: 'jasmine',
-        reporter: ['clear-text', 'progress']
+        karmaConfig: {
+            browsers: ['Chrome']
+        },
+        reporter: ['html', 'progress']
     });
 };

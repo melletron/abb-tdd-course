@@ -100,7 +100,7 @@
             var cards = [];
             this.collection.forEach(player => {
                 let cardsAmount = player.cards.length;
-                for (let i = 0; i < cardsAmount; i++) {
+                for (let i = 0; i < cardsAmount; i += 1) {
                     let card = player.cards.pop();
                     cards.push(card);
                 }

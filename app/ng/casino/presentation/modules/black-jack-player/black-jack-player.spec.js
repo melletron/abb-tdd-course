@@ -76,6 +76,7 @@ describe('casino.presentation.modules.black-jack-player', function () {
                 this.blackJackPlayerDirectiveController.cards = [0];
                 this.blackJackPlayerDirectiveController.leave();
                 expect(this.playersMock.removeByName).not.toHaveBeenCalled();
+                expect(console.log).toHaveBeenCalled();
             });
         });
 

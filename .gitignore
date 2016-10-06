@@ -4,6 +4,7 @@ node_modules
 /vendor
 tmp
 report
+reports
 .idea
 coverage
 .stryker-tmp

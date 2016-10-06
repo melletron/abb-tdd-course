@@ -15,9 +15,7 @@ module.exports = function (config) {
             'app/**/!(*spec).js': ['coverage']
         },
         browsers: [
-            'Chrome',
-//            'Firefox',
-//            'Safari'
+            'Chrome'
         ],
         singleRun: true
     });

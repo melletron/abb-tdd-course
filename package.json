@@ -26,6 +26,7 @@
     "karma-spec-reporter": "0.0.26",
     "stryker": "^0.4.3",
     "stryker-api": "^0.2.0",
+    "stryker-html-reporter": "^0.2.2",
     "stryker-karma-runner": "^0.2.1"
   }
 }
