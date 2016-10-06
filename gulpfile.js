@@ -6,8 +6,8 @@ var istanbul = require('gulp-istanbul');
 
 var specRunnerConfig = [
     'vendor/angular/angular.js',
-    'test/mocks/**/*.js',
     'vendor/angular-mocks/angular-mocks.js',
+    'test/mocks/**/*.js',
     'app/**/*.js',
     'app/**/*.spec.js'
 ];

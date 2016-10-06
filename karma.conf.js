@@ -16,8 +16,8 @@ module.exports = function (config) {
         },
         browsers: [
             'Chrome',
-            'Firefox',
-            'Safari'
+//            'Firefox',
+//            'Safari'
         ],
         singleRun: true
     });
