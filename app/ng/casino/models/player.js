@@ -20,8 +20,19 @@
                  * In order to get classical inheritance,
                  *  we call the constructor of the Object we want it to inherit the
                  *  blueprint from.
+                 *
+                 *  As a JavaScript developer you should understand the differences
+                 *  between prototypal and classical inheritance.
+                 *
+                 *  Prototypal inheritance is great, it allows you to to collect functions
+                 *  from other place to manipulate your state. prototypal OO :)
+                 *
+                 *  Classical inheritance is the give you classic OO. It's a powerful yet dangreous way
+                 *  of doing OO. Most developers avoid it rightfully so. You want to avoid the banana gorilla problem
+                 *      "You wanted a banana but you got a gorilla holding the banana"
+                 *
                  */
-                BaseModel.call(this);
+                BaseModel.apply(this, arguments);
                 this.name = obj.name;
                 this.cards = obj.cards || [];
             };
