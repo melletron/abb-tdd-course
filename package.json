@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-    "stryker": "stryker -c stryker.conf.js"
+    "stryker": "stryker -c stryker.conf.js",
+    "babel": "babel app -d app-es5 --ignore spec.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
     "gulp": "^3.9.1",
     "gulp-istanbul": "^0.10.4",
     "gulp-jasmine-browser": "^1.3.0",

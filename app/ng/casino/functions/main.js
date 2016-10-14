@@ -19,6 +19,56 @@
                 2: 2
             };
             return {
+                tableSort: cards => {
+                    return {
+                        first: {
+                            a: [],
+                            b: [],
+                            c: []
+                        },
+                        second: {
+                            a: [],
+                            b: [],
+                            c: []
+                        },
+                        third: {
+                            a: [],
+                            b: [],
+                            c: []
+                        }
+                    }
+                },
+                testDiversity: (groupA, groupB) => {
+                    let diversity = 0;
+                    let av = (groupA.length + groupB.length) * 0.5;
+                    groupA.forEach(element => {
+                        for (let i = 0; i < groupB.length; i += 1) {
+                            if (element === groupB[i]) {
+                                diversity += 1;
+                                break;
+                            }
+                        }
+                    });
+                    return 100 - (diversity / av) * 100;
+                },
+                isTableRound: cards => {
+                    for (let i = 0; i < cards.length; i += 1) {
+                        if (i === 0) {
+                            let current = cards[i];
+                            let prev = cards[cards.length - 1];
+                            if ((current.substr(0, 1) === prev.substr(0, 1)) || (current.substr(1, 1) === prev.substr(1, 1))) {
+                                return false;
+                            }
+                        } else {
+                            let current = cards[i];
+                            let prev = cards[i - 1];
+                            if ((current.substr(0, 1) === prev.substr(0, 1)) || (current.substr(1, 1) === prev.substr(1, 1))) {
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                },
                 flatten: data => {
                     var returnData = [];
                     data.forEach(function (element) {

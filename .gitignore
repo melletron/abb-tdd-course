@@ -8,3 +8,4 @@ reports
 .idea
 coverage
 .stryker-tmp
+app-es5
