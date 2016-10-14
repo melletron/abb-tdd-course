@@ -4,16 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "karma start karma.conf.js",
+    "stryker": "stryker -c stryker.conf.js",
+    "babel": "babel app -d app-es5 --ignore spec.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-latest": "^6.16.0",
     "gulp": "^3.9.1",
     "gulp-istanbul": "^0.10.4",
     "gulp-jasmine-browser": "^1.3.0",
     "gulp-jasmine-phantom": "^3.0.0",
     "gulp-watch": "^4.3.5",
-    "jasmine-istanbul-phantom": "^1.1.1"
+    "jasmine-istanbul-phantom": "^1.1.1",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-spec-reporter": "0.0.26",
+    "stryker": "^0.4.3",
+    "stryker-api": "^0.2.0",
+    "stryker-html-reporter": "^0.2.2",
+    "stryker-karma-runner": "^0.2.1"
   }
 }

@@ -1,0 +1,23 @@
+<h1 class="text-center">Time played {{table.timePlayed | prettify}}</h1>
+<div class="row">
+    <div class="col-xs-6">
+        <form ng-submit="table.addPlayer()">
+
+            <input type="text" name="playerName" ng-model="table.playerNameToAdd">
+            <a href="#"
+               class="btn"
+               data-ng-click="table.addPlayer()">Add</a>
+
+
+        </form>
+    </div>
+    <div class="col-xs-6">
+        <a class="btn btn-success" data-ng-click="table.reshuffle()">Reshuffle</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6" data-ng-repeat="player in table.players">
+        <black-jack-player data-test="cock" data-name="{{table.players[$index].name}}"/>
+    </div>
+</div>

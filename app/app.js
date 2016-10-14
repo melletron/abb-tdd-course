@@ -1,1 +1,4 @@
-angular.module('casino', ['casino.black-jack.directives']);
+angular.module('casino', [
+    'casino.presentation.widgets.score-board',
+    'casino.presentation.widgets.black-jack'
+]);
