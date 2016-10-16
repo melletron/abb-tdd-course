@@ -1,15 +1,23 @@
 (function () {
     "use strict";
 
-    function Cards(ls, main) {
+    function Cards(ls, main, rest) {
         this.collection = [];
-        ls.linkCollectionToLocalStorage(this.collection, "cards");
-        if (this.collection.length === 0) {
-            let cards = main.shuffle("♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";"));
-            cards.forEach(card => {
-                this.collection.push(card);
-            });
-        }
+
+
+//        ls.linkCollectionToLocalStorage(this.collection, "cards");
+
+        rest.getCollectionFromServer('/abb-tdd-course/server/cards.json').then(response => {
+            this.collection = response.data;
+        });
+
+//        if (this.collection.length === 0) {
+//            let cards = main.shuffle("♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";"));
+//            cards.forEach(card => {
+//                this.collection.push(card);
+//            });
+//        }
+
         this.shuffle = deck => {
             if (deck) {
                 deck.forEach(card => {
@@ -38,7 +46,7 @@
      * @param ls
      * @constructor
      */
-    function Players(Player, ls) {
+    function Players(Player, ls, rest) {
 
         /**
          * The collection is an Array containing
@@ -47,12 +55,23 @@
         this.collection = [];
 
         /**
+         * Since Angular services are only instantiated if they're injected we can
+         *  do the initial service GET from the constructor function (this function)
+         */
+
+        rest.getCollectionFromServer('/abb-tdd-course/server/players.json').then(response => {
+            response.data.forEach(player => {
+                this.collection.push(new Player(player))
+            });
+        });
+
+        /**
          * We link the players collection to the local storage.
          * So each time a player is added, it synchronises with an external
          * data store
          */
 
-        ls.linkCollectionToLocalStorage(this.collection, "players", Player);
+//        ls.linkCollectionToLocalStorage(this.collection, "players", Player);
 
         /**
          * We need privileged methods that can access the dependencies
@@ -112,7 +131,11 @@
         }
     };
 
-    angular.module("casino.collections.black-jack", ["casino.interfaces.local-storage", "casino.models.player"])
+    angular.module("casino.collections.black-jack", [
+        "casino.interfaces.local-storage",
+        "casino.interfaces.client-server",
+        "casino.models.player"
+    ])
     /**
      * Because a service is a singleton
      * and gets initialised by Angular on bootstrap
