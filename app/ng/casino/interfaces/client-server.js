@@ -8,6 +8,11 @@
                     return $http({
                         url: location
                     });
+                },
+                getModelFromServer: function (location) {
+                    return $http({
+                        url: location
+                    });
                 }
             };
         });

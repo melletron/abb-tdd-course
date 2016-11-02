@@ -32,11 +32,11 @@ describe('casino.functions.main', function () {
 
 //    xdescribe('tableSort', function () {
 //        beforeEach(function () {
-//            this.cards = "♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;".split(';');
+//            this.casino.cards = "♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;".split(';');
 //        });
-//        it("takes a collection of cards, and groups them over 3 x 3 collections such that no suits are seated next to each other, and combination of cards is repeated, and no two face values are allowed to sit next to each other", function () {
+//        it("takes a collection of casino.cards, and groups them over 3 x 3 collections such that no suits are seated next to each other, and combination of casino.cards is repeated, and no two face values are allowed to sit next to each other", function () {
 //
-//            let result = this.main.tableSort(this.cards);
+//            let result = this.main.tableSort(this.casino.cards);
 //            let firstTables = result.first;
 //            let secondTables = result.second;
 //            let thirdTables = result.third;
@@ -51,7 +51,7 @@ describe('casino.functions.main', function () {
 //            expect(this.main.isTableRound(result.third.b)).toBe(true);
 //            expect(this.main.isTableRound(result.third.c)).toBe(true);
 //
-//            //Test if cards are not assigned twice
+//            //Test if casino.cards are not assigned twice
 //            Object.keys(result).forEach(key => {
 //                let roundTable = result[key];
 //                expect(this.main.testDiversity(roundTable.a, roundTable.b)).toBe(100);
@@ -92,7 +92,7 @@ describe('casino.functions.main', function () {
 
     describe('isTableRound', function () {
 
-        it("takes a collection of cards and makes sure no suits match or face values match", function () {
+        it("takes a collection of casino.cards and makes sure no suits match or face values match", function () {
             expect(this.main.isTableRound(['♠A', '♠K', '♠Q', '♠J'])).toBe(false);
             expect(this.main.isTableRound(['♠A', '♠K', '♦Q', '♠J'])).toBe(false);
             expect(this.main.isTableRound(['♠A', '♦K', '♠Q', '♦J'])).toBe(true);

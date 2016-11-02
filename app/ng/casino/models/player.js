@@ -2,14 +2,14 @@
     "use strict";
 
 
-    angular.module("casino.models.player", ["casino.functions.main", "casino.models.base"])
-        .factory("Player", function (main, BaseModel) {
+    angular.module("casino.models.player", ["casino.functions.main", "casino.models.base", "casino.interfaces.client-server"])
+        .factory("Player", function (main, rest, BaseModel) {
 
             /**
              * A data model is a classic JavaScript Object
              * it begins with a constructor function initialising the data model
-             */
-            /**
+             *
+             *
              * @class Player
              * @inherits from BaseModel
              * @param obj
@@ -51,6 +51,9 @@
                         suit: card.substr(0, 1),
                         face: card.substr(1)
                     })
+                },
+                getPlayer: function () {
+                    rest.getModelFromServer(this.name)
                 },
                 /**
                  *

@@ -8,26 +8,26 @@ public class Card {
     @Id
     public String id;
 
-    public String firstName;
-    public String lastName;
+    public String suit;
+    public String value;
 
     public Card() {
     }
 
     public Card(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.suit = firstName;
+        this.value = lastName;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Player[id=%s, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Card[id=%s, suit='%s', value='%s']",
+                id, suit, value);
     }
 
     public boolean isValid() {
-        if (firstName != null && lastName != null) {
+        if (suit != null && value != null) {
             return true;
         }
         return false;

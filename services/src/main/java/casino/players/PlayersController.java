@@ -2,6 +2,7 @@ package casino.players;
 
 import java.util.ArrayList;
 
+import casino.exceptions.Http400Exception;
 import casino.exceptions.Http404Exception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,8 @@ public class PlayersController {
     public Players addPlayer(@RequestBody Player player) {
         if (player.isValid()) {
             repository.save(player);
+        } else {
+            throw new Http400Exception();
         }
         return new Players(getPlayersList());
     }

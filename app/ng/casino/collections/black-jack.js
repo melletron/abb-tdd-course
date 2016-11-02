@@ -7,7 +7,7 @@
 
 //        ls.linkCollectionToLocalStorage(this.collection, "cards");
 
-        rest.getCollectionFromServer('/abb-tdd-course/server/cards.json').then(response => {
+        rest.getCollectionFromServer('/abb-tdd-course/server/casino.cards.json').then(response => {
             this.collection = response.data;
         });
 
@@ -59,7 +59,7 @@
          *  do the initial service GET from the constructor function (this function)
          */
 
-        rest.getCollectionFromServer('/abb-tdd-course/server/players.json').then(response => {
+        rest.getCollectionFromServer('/abb-tdd-course/server/casino.players.json').then(response => {
             response.data.forEach(player => {
                 this.collection.push(new Player(player))
             });
