@@ -1,48 +1,8 @@
 (function () {
     "use strict";
 
-    function shareDecorator(serviceName) {
-        return function ($delegate, $interval, $window) {
-            console.log('sharing', serviceName)
-            $window.AAB_RESOURCES = $window.AAB_RESOURCES || {};
-            $window.AAB_RESOURCES[serviceName] = $window.AAB_RESOURCES[serviceName] || [];
-            $delegate.collection = $window.AAB_RESOURCES[serviceName];
-            $delegate.cache = JSON.stringify($delegate.collection);
-            $delegate.collection.bust = 1;
-            var cacheBuster = () => {
-                let checker = (JSON.stringify($delegate.collection) !== $delegate.cache);
-                if (checker) {
-                    $delegate.cache = JSON.stringify($delegate.collection);
-                    $delegate.collection.bust++;
-                    if ($delegate.collection.bust === 99) {
-                        $delegate.collection.bust = 0;
-                    }
-                }
-            };
-            $interval(cacheBuster, 16);
-            return $delegate;
-        };
-    }
-
-    function localStorageDecorator(serviceName, objectName) {
-        return function ($delegate, $injector, ls) {
-            if ($delegate.collection.linked !== true) {
-                let object = undefined;
-                $delegate.collection.linked = true;
-                if (objectName) {
-                    object = $injector.get(objectName);
-                }
-                ls.linkCollectionToLocalStorage($delegate.collection, serviceName, object);
-            }
-            return $delegate;
-        }
-    }
-
-    function Cards(ls, main, rest, $timeout) {
+    function Cards(main, $timeout) {
         this.collection = [];
-
-
-        // ls.linkCollectionToLocalStorage(this.collection, "cards");
 
         // rest.getCollectionFromServer('/abb-tdd-course/server/casino.cards.json').then(response => {
         //     this.collection = response.data;
@@ -86,7 +46,7 @@
      * @param ls
      * @constructor
      */
-    function Players(Player, ls, rest) {
+    function Players(Player, rest) {
 
         /**
          * The collection is an Array containing
@@ -105,13 +65,6 @@
         //     });
         // });
 
-        /**
-         * We link the players collection to the local storage.
-         * So each time a player is added, it synchronises with an external
-         * data store
-         */
-
-        // ls.linkCollectionToLocalStorage(this.collection, "players", Player);
 
         /**
          * We need privileged methods that can access the dependencies
@@ -172,7 +125,7 @@
     };
 
     angular.module("casino.collections.black-jack", [
-        "casino.interfaces.local-storage",
+        "casino.decorators.resource-decorators",
         "casino.interfaces.client-server",
         "casino.models.player"
     ])
@@ -182,9 +135,11 @@
      * we write the Object with Pascal case but register it using camel case.
      */
         .service("players", Players)
-        .decorator("players", shareDecorator("players"))
-        .decorator("players", localStorageDecorator("players", "Player"))
         .service("cards", Cards)
-        .decorator("cards", shareDecorator("cards"));
+        .config(function ($provide, shareDecorator, localStorageDecorator) {
+            $provide.decorator("players", shareDecorator("players"));
+            $provide.decorator("players", localStorageDecorator("players", "Player"));
+            // $provide.decorator("cards", shareDecorator("cards"));
+        });
 
 }());
