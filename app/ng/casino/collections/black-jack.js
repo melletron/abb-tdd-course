@@ -1,22 +1,62 @@
 (function () {
     "use strict";
 
-    function Cards(ls, main, rest) {
+    function shareDecorator(serviceName) {
+        return function ($delegate, $interval, $window) {
+            console.log('sharing', serviceName)
+            $window.AAB_RESOURCES = $window.AAB_RESOURCES || {};
+            $window.AAB_RESOURCES[serviceName] = $window.AAB_RESOURCES[serviceName] || [];
+            $delegate.collection = $window.AAB_RESOURCES[serviceName];
+            $delegate.cache = JSON.stringify($delegate.collection);
+            $delegate.collection.bust = 1;
+            var cacheBuster = () => {
+                let checker = (JSON.stringify($delegate.collection) !== $delegate.cache);
+                if (checker) {
+                    $delegate.cache = JSON.stringify($delegate.collection);
+                    $delegate.collection.bust++;
+                    if ($delegate.collection.bust === 99) {
+                        $delegate.collection.bust = 0;
+                    }
+                }
+            };
+            $interval(cacheBuster, 16);
+            return $delegate;
+        };
+    }
+
+    function localStorageDecorator(serviceName, objectName) {
+        return function ($delegate, $injector, ls) {
+            if ($delegate.collection.linked !== true) {
+                let object = undefined;
+                $delegate.collection.linked = true;
+                if (objectName) {
+                    object = $injector.get(objectName);
+                }
+                ls.linkCollectionToLocalStorage($delegate.collection, serviceName, object);
+            }
+            return $delegate;
+        }
+    }
+
+    function Cards(ls, main, rest, $timeout) {
         this.collection = [];
 
 
-//        ls.linkCollectionToLocalStorage(this.collection, "cards");
+        // ls.linkCollectionToLocalStorage(this.collection, "cards");
 
-        rest.getCollectionFromServer('/abb-tdd-course/server/casino.cards.json').then(response => {
-            this.collection = response.data;
-        });
+        // rest.getCollectionFromServer('/abb-tdd-course/server/casino.cards.json').then(response => {
+        //     this.collection = response.data;
+        // });
 
-//        if (this.collection.length === 0) {
-//            let cards = main.shuffle("♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";"));
-//            cards.forEach(card => {
-//                this.collection.push(card);
-//            });
-//        }
+
+        $timeout(() => {
+            if (this.collection.length === 0) {
+                let cards = main.shuffle("♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";"));
+                cards.forEach(card => {
+                    this.collection.push(card);
+                });
+            }
+        }, 0);
 
         this.shuffle = deck => {
             if (deck) {
@@ -59,11 +99,11 @@
          *  do the initial service GET from the constructor function (this function)
          */
 
-        rest.getCollectionFromServer('/abb-tdd-course/server/casino.players.json').then(response => {
-            response.data.forEach(player => {
-                this.collection.push(new Player(player))
-            });
-        });
+        // rest.getCollectionFromServer('/abb-tdd-course/server/casino.players.json').then(response => {
+        //     response.data.forEach(player => {
+        //         this.collection.push(new Player(player))
+        //     });
+        // });
 
         /**
          * We link the players collection to the local storage.
@@ -71,7 +111,7 @@
          * data store
          */
 
-//        ls.linkCollectionToLocalStorage(this.collection, "players", Player);
+        // ls.linkCollectionToLocalStorage(this.collection, "players", Player);
 
         /**
          * We need privileged methods that can access the dependencies
@@ -142,6 +182,9 @@
      * we write the Object with Pascal case but register it using camel case.
      */
         .service("players", Players)
-        .service("cards", Cards);
+        .decorator("players", shareDecorator("players"))
+        .decorator("players", localStorageDecorator("players", "Player"))
+        .service("cards", Cards)
+        .decorator("cards", shareDecorator("cards"));
 
 }());

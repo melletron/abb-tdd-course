@@ -34,5 +34,10 @@
      * module names, but for a PoC this is sufficient.
      *
      */
-    angular.bootstrap(ngNodes, Object.keys(lazy));
+    ngNodes.forEach(node => {
+
+        angular.bootstrap(node, [node.getAttribute('ng-lazy-load')]);
+    });
+
+    // angular.bootstrap(ngNodes, Object.keys(lazy));
 }());

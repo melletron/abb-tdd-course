@@ -5,7 +5,7 @@
 
         return {
             link: (scope, el, attr) => {
-                scope.players = players.collection;
+                scope.players = players.getAllPlayers();
             },
             restrict: 'E',
             templateUrl: "ng/casino/presentation/widgets/score-board/score-board.html"
