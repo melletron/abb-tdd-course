@@ -1,8 +1,6 @@
 var gulp = require('gulp');
 var jasmineBrowser = require('gulp-jasmine-browser');
-var jasmine = require('gulp-jasmine-phantom');
 var watch = require('gulp-watch');
-var istanbul = require('gulp-istanbul');
 
 var specRunnerConfig = [
     'vendor/angular/angular.js',
