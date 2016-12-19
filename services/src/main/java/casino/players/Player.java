@@ -1,5 +1,6 @@
 package casino.players;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 
 
@@ -26,6 +27,7 @@ public class Player {
                 id, firstName, lastName);
     }
 
+    @JsonIgnore
     public boolean isValid() {
         if (firstName != null && lastName != null) {
             return true;

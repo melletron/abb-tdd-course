@@ -23,7 +23,7 @@ public class PlayersController {
         return playersList;
     }
 
-    @RequestMapping(value = "/casino/players", method = RequestMethod.GET)
+    @RequestMapping(value = "/casino/players", method = RequestMethod.GET, produces = "application/json")
     public Players players() {
         return new Players(getPlayersList());
     }
