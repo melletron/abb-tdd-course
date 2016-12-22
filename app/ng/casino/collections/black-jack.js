@@ -4,11 +4,6 @@
     function Cards(main, $timeout) {
         this.collection = [];
 
-        // rest.getCollectionFromServer('/abb-tdd-course/server/casino.cards.json').then(response => {
-        //     this.collection = response.data;
-        // });
-
-
         $timeout(() => {
             if (this.collection.length === 0) {
                 let cards = main.shuffle("♠A;♠K;♠Q;♠J;♠10;♠9;♠8;♠7;♠6;♠5;♠4;♠3;♠2;♥A;♥K;♥Q;♥J;♥10;♥9;♥8;♥7;♥6;♥5;♥4;♥3;♥2;♦A;♦K;♦Q;♦J;♦10;♦9;♦8;♦7;♦6;♦5;♦4;♦3;♦2;♣A;♣K;♣Q;♣J;♣10;♣9;♣8;♣7;♣6;♣5;♣4;♣3;♣2".split(";"));
@@ -77,10 +72,7 @@
          * @returns {*}
          */
         this.getPlayer = name => {
-
-            var players = this.collection.filter(function (player) {
-                return player.name === name;
-            });
+            let players = this.collection.filter(player => player.name === name);
             if (players.length > 0) {
                 return players[0];
             }

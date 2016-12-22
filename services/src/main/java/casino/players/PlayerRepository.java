@@ -2,9 +2,11 @@ package casino.players;
 
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface PlayerRepository extends MongoRepository<Player, String> {
-    public Player findByFirstName(String firstName);
+    Player findByFirstName(String firstName);
 
-    public List<Player> findByLastName(String lastName);
+    List<Player> findByLastName(String lastName);
 }

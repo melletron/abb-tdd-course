@@ -25,6 +25,7 @@
             };
         })
         .constant('localStorageDecorator', function localStorageDecorator(serviceName, objectName) {
+
             return function ($delegate, $injector, ls) {
                 if ($delegate.collection.linked !== true) {
                     let object = undefined;
@@ -41,5 +42,6 @@
                 }
                 return $delegate;
             }
+
         });
 }());

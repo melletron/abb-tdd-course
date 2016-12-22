@@ -7,6 +7,8 @@ import casino.exceptions.Http404Exception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PreDestroy;
+
 @RestController
 public class PlayersController {
 
@@ -23,7 +25,7 @@ public class PlayersController {
         return playersList;
     }
 
-    @RequestMapping(value = "/casino/players", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/casino/players", method = RequestMethod.GET)
     public Players players() {
         return new Players(getPlayersList());
     }
@@ -51,5 +53,10 @@ public class PlayersController {
             throw new Http400Exception();
         }
         return new Players(getPlayersList());
+    }
+
+    @PreDestroy
+    public void byeBye () {
+        System.out.println("Bye bye");
     }
 }

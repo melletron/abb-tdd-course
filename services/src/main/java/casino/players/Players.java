@@ -1,5 +1,6 @@
 package casino.players;
 
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 public class Players {

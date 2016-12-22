@@ -2,7 +2,7 @@ package casino.players;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
-
+import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Player {
 
@@ -29,6 +29,7 @@ public class Player {
 
     @JsonIgnore
     public boolean isValid() {
+        System.out.println(firstName + "  " + lastName);
         if (firstName != null && lastName != null) {
             return true;
         }
